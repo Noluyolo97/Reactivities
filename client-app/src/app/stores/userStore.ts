@@ -4,7 +4,6 @@ import agent from "../api/agent";
 import { User, UserFormValues } from "../models/user";
 import { store } from "./stores";
 
-
 export default class UserStore {
     user: User | null = null;
 
@@ -55,4 +54,8 @@ export default class UserStore {
             throw error;
         }
     }
+
+    setImage = (image: string) => {
+        if (this.user) this.user.image = image;
+    } 
 }
