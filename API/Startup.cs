@@ -7,6 +7,7 @@ using API.Middleware;
 using Application.Activities;
 using Application.Core;
 using AutoMapper;
+using API.SignalR;
 using FluentValidation.AspNetCore;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -72,6 +73,7 @@ namespace API
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHub<ChatHub>("/chat");
             });
         }
     }
