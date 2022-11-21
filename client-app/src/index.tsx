@@ -6,16 +6,18 @@ import 'react-toastify/dist/ReactToastify.min.css';
 import 'react-datepicker/dist/react-datepicker.css';
 import './app/layout/styles.css';
 import App from './app/layout/App';
-import { store, StoreContext } from './app/stores/stores';
 import reportWebVitals from './reportWebVitals';
-import { createBrowserHistory} from 'history';
 import { Router } from 'react-router-dom';
+import {createBrowserHistory} from 'history';
+import ScrollToTop from './app/layout/ScrollToTop';
+import { store, StoreContext } from './app/stores/stores';
 
 export const history = createBrowserHistory();
 
 ReactDOM.render(
   <StoreContext.Provider value={store}>
     <Router history={history}>
+      <ScrollToTop />
       <App />
     </Router>
   </StoreContext.Provider>,

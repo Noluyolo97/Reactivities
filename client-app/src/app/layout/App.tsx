@@ -10,12 +10,12 @@ import TestErrors from '../../features/errors/TestError';
 import { ToastContainer } from 'react-toastify';
 import NotFound from '../../features/errors/NotFound';
 import ServerError from '../../features/errors/ServerError';
-import LoginForm from '../../features/users/LoginForm';
 import LoadingComponent from './LoadingComponent';
 import ProfilePage from '../../features/profiles/ProfilePage';
+import PrivateRoute from './PrivateRoute';
 import { useStore } from '../stores/stores';
-import HomePage from '../../features/home/Homepage';
 import ModalContainer from '../Common/modals/ModalContainer';
+import Homepage from '../../features/home/Homepage';
 
 function App() {
   const location = useLocation();
@@ -35,7 +35,7 @@ function App() {
     <>
       <ToastContainer position='bottom-right' hideProgressBar />
       <ModalContainer />
-      <Route exact path='/' component={HomePage} />
+      <Route exact path='/' component={Homepage} />
       <Route
         path={'/(.+)'}
         render={() => (
@@ -43,13 +43,12 @@ function App() {
             <NavBar />
             <Container style={{ marginTop: '7em' }}>
               <Switch>
-                <Route exact path='/activities' component={ActivityDashboard} />
-                <Route path='/activities/:id' component={ActivityDetails} />
-                <Route key={location.key} path={['/createActivity', '/manage/:id']} component={ActivityForm} />
-                <Route path='/profiles/:username' component={ProfilePage} />
+                <PrivateRoute exact path='/activities' component={ActivityDashboard} />
+                <PrivateRoute path='/activities/:id' component={ActivityDetails} />
+                <PrivateRoute key={location.key} path={['/createActivity', '/manage/:id']} component={ActivityForm} />
+                <PrivateRoute path='/profiles/:username' component={ProfilePage} />
                 <Route path='/errors' component={TestErrors} />
                 <Route path='/server-error' component={ServerError} />
-                <Route path='/login' component={LoginForm} />
                 <Route component={NotFound} />
               </Switch>
             </Container>
